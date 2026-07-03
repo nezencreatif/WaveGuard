@@ -3,48 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WAVEGUARD | Perlengkapan Selancar & Pantai Aman</title>
+    <title>WAVEGUARD | Ecosystem Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #FAFAFA;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
         }
 
         /* WAVEGUARD Custom Color Palette */
-        .color-sky { color: #E1F2F2; }
-        .bg-sky-wg { background-color: #E1F2F2; }
-        
-        .color-ocean { color: #51B5B3; }
-        .bg-ocean-wg { background-color: #51B5B3; }
-        
-        .color-sand { color: #F4E7CE; }
-        .bg-sand-wg { background-color: #F4E7CE; }
-        
         .color-navy { color: #1C3B5E; }
         .bg-navy-wg { background-color: #1C3B5E; }
+        .color-ocean { color: #51B5B3; }
+        .bg-ocean-wg { background-color: #51B5B3; }
+        .bg-sand-wg { background-color: #F4E7CE; }
 
-        /* Commercial Hero Background using real imagery */
-        .hero-bg {
-            background-image: linear-gradient(rgba(28, 59, 94, 0.75), rgba(28, 59, 94, 0.4)), url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        /* Campaign Hero Background */
+        .hero-campaign {
+            background-image: linear-gradient(rgba(28, 59, 94, 0.5), rgba(28, 59, 94, 0.7)), url('https://images.unsplash.com/photo-1526360408575-b6d37651a039?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-position: center 30%;
         }
 
-        /* Smooth Scrolling */
-        html { scroll-behavior: smooth; }
-
-        /* Hide scrollbar for category filter */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Product Card Hover Effect */
+        .product-card .add-to-cart-btn {
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .product-card:hover .add-to-cart-btn {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         /* Toast Animation */
@@ -52,445 +44,657 @@
             0% { transform: translateY(20px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
-        .toast-enter {
-            animation: slideUpFade 0.3s ease-out forwards;
+        .toast-enter { animation: slideUpFade 0.3s ease-out forwards; }
+        
+        /* Floating Animation for Hero Image */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        
+        /* Smooth scrolling and hide scrollbar */
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="text-gray-800 antialiased">
+<body class="text-gray-800 antialiased overflow-x-hidden">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm" id="navbar">
+    <!-- Promo Top Bar -->
+    <div class="bg-[#1C3B5E] text-white text-xs md:text-sm text-center py-2.5 font-medium tracking-wide">
+        PELUNCURAN EKOSISTEM WAVEGUARD 2026: GRATIS ONGKIR KE SELURUH INDONESIA
+    </div>
+
+    <!-- E-commerce Navbar -->
+    <nav class="sticky top-0 w-full z-50 transition-all duration-300 bg-white border-b border-gray-100 shadow-sm" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 mr-3 relative flex items-center justify-center">
-                        <img src="https://drive.google.com/thumbnail?id=1D3Vif2sLcKLJxDYZCyW2SaYzEgNENV-0&sz=w500" alt="Waveguard Logo" class="w-full h-full object-contain drop-shadow-sm">
+                
+                <!-- Left: Mobile Menu & Search (Desktop) -->
+                <div class="flex items-center flex-1">
+                    <button class="md:hidden mr-4 text-gray-700" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                    <div class="hidden md:flex relative w-full max-w-xs group">
+                        <input type="text" id="desktop-search" placeholder="Cari di Waveguard..." class="w-full bg-gray-50 border border-gray-200 rounded-full py-2.5 pl-11 pr-4 text-sm focus:outline-none focus:border-[#51B5B3] focus:ring-1 focus:ring-[#51B5B3] transition-all">
+                        <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2 group-focus-within:text-[#51B5B3]"></i>
                     </div>
-                    <span class="text-2xl font-extrabold tracking-tight">
-                        <span class="text-[#1C3B5E]">WAVE</span><span class="text-[#51B5B3]">GUARD</span>
+                </div>
+
+                <!-- Center: Logo -->
+                <div class="flex-shrink-0 flex items-center justify-center flex-1 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-8 h-8 md:w-10 md:h-10 mr-2 md:mr-3 relative flex items-center justify-center">
+                        <img src="https://drive.google.com/thumbnail?id=1D3Vif2sLcKLJxDYZCyW2SaYzEgNENV-0&sz=w500" alt="Waveguard Logo" class="w-full h-full object-contain">
+                    </div>
+                    <span class="text-xl md:text-2xl font-extrabold tracking-tight uppercase">
+                        <span class="text-[#1C3B5E]">Wave</span><span class="text-[#51B5B3]">guard</span>
                     </span>
                 </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#beranda" class="text-gray-600 hover:text-[#51B5B3] font-semibold transition">Beranda</a>
-                    <a href="#tentang-kami" class="text-gray-600 hover:text-[#51B5B3] font-semibold transition">Tentang Kami</a>
-                    <a href="#unggulan" class="text-gray-600 hover:text-[#51B5B3] font-semibold transition">Produk Utama</a>
-                    <a href="#katalog" class="text-gray-600 hover:text-[#51B5B3] font-semibold transition">Katalog Belanja</a>
+                <!-- Right: Account & Cart -->
+                <div class="flex items-center justify-end flex-1 space-x-4 md:space-x-6">
+                    <button class="text-gray-700 hover:text-[#51B5B3] transition hidden sm:block" onclick="toggleAccount()">
+                        <i data-lucide="user" class="w-6 h-6"></i>
+                    </button>
+                    <button class="text-gray-700 hover:text-[#51B5B3] transition sm:hidden" onclick="document.getElementById('mobile-search-bar').classList.toggle('hidden')">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                    </button>
+                    <button class="relative text-gray-700 hover:text-[#51B5B3] transition flex items-center" onclick="toggleCart()">
+                        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                        <span id="cart-count" class="absolute -top-1.5 -right-2 bg-[#51B5B3] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full opacity-0 transition-opacity duration-300">0</span>
+                    </button>
                 </div>
+            </div>
+            
+            <!-- Mobile Search Bar (Hidden by default) -->
+            <div id="mobile-search-bar" class="hidden px-4 py-3 border-t border-gray-50 bg-white md:hidden">
+                <div class="relative w-full">
+                    <input type="text" id="mobile-search" placeholder="Cari produk..." class="w-full bg-gray-50 border border-gray-200 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-[#51B5B3]">
+                    <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                </div>
+            </div>
 
-                <!-- Cart Icon -->
-                <div class="flex items-center">
-                    <button class="relative p-2 text-[#1C3B5E] hover:text-[#51B5B3] transition bg-[#F4E7CE] rounded-full hover:bg-[#e8d7b8]" onclick="toggleCart()">
-                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                        <span id="cart-count" class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white opacity-0 transition-opacity duration-300">0</span>
-                    </button>
-                    <!-- Mobile Menu Button -->
-                    <button class="md:hidden ml-4 text-[#1C3B5E]" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                        <i data-lucide="menu" class="w-7 h-7"></i>
-                    </button>
-                </div>
+            <!-- Desktop Categories Navigation -->
+            <div class="hidden md:flex justify-center space-x-10 py-3 border-t border-gray-50">
+                <a href="#katalog" onclick="filterCategory('semua')" class="text-sm font-semibold text-gray-800 hover:text-[#51B5B3] transition uppercase tracking-wide">Semua Produk</a>
+                <a href="#katalog" onclick="filterCategory('pakaian')" class="text-sm font-semibold text-gray-600 hover:text-[#51B5B3] transition uppercase tracking-wide">Pakaian & Pelindung</a>
+                <a href="#katalog" onclick="filterCategory('gear')" class="text-sm font-semibold text-gray-600 hover:text-[#51B5B3] transition uppercase tracking-wide">Papan & Tas</a>
+                <a href="#katalog" onclick="filterCategory('aksesoris')" class="text-sm font-semibold text-gray-600 hover:text-[#51B5B3] transition uppercase tracking-wide">Aksesoris</a>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-4 space-y-1 shadow-lg">
-            <a href="#beranda" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#51B5B3] hover:bg-gray-50">Beranda</a>
-            <a href="#tentang-kami" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#51B5B3] hover:bg-gray-50">Tentang Kami</a>
-            <a href="#unggulan" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#51B5B3] hover:bg-gray-50">Produk Utama</a>
-            <a href="#katalog" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#51B5B3] hover:bg-gray-50">Katalog Belanja</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-2 shadow-lg absolute w-full">
+            <a href="#katalog" onclick="filterCategory('semua')" class="block px-3 py-3 rounded-md text-sm font-semibold text-gray-800 hover:bg-gray-50 border-b border-gray-50">Koleksi Lengkap</a>
+            <a href="#katalog" onclick="filterCategory('pakaian')" class="block px-3 py-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-50 border-b border-gray-50">Pakaian & Pelindung</a>
+            <a href="#katalog" onclick="filterCategory('gear')" class="block px-3 py-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-50 border-b border-gray-50">Papan & Tas</a>
+            <a href="#katalog" onclick="filterCategory('aksesoris')" class="block px-3 py-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-50">Aksesoris</a>
         </div>
     </nav>
 
-    <!-- Hero Section (Commercial E-commerce Vibe) -->
-    <section id="beranda" class="relative pt-32 pb-20 md:pt-40 md:pb-32 hero-bg min-h-[85vh] flex items-center justify-center overflow-hidden">
-        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-10">
-            <!-- Clear, Bold Commercial Shield Logo -->
-            <div class="mx-auto w-32 h-36 mb-8 relative drop-shadow-2xl transform hover:scale-105 transition duration-500">
-                <img src="https://drive.google.com/thumbnail?id=1D3Vif2sLcKLJxDYZCyW2SaYzEgNENV-0&sz=w1000" alt="Waveguard Logo Besar" class="w-full h-full object-contain">
+    <!-- Campaign Hero (Powerful Premium Vibe) -->
+    <section class="relative min-h-[85vh] hero-campaign flex items-center py-20 overflow-hidden">
+        <!-- Dark gradient overlay for extreme contrast -->
+        <div class="absolute inset-0 bg-gradient-to-r from-[#1C3B5E] via-[#1C3B5E]/90 to-transparent"></div>
+        
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-16">
+            
+            <!-- Text Content (Kiri) -->
+            <div class="w-full lg:w-[55%] text-center lg:text-left mt-10 lg:mt-0">
+                <!-- Tech Badge -->
+                <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-[#51B5B3] animate-pulse"></span>
+                    <span class="text-white text-xs font-bold tracking-[0.2em] uppercase">Era Baru Keselamatan Air</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-white mb-6 tracking-tighter drop-shadow-2xl leading-[1.05]">
+                    RIDE THE <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#51B5B3] to-[#E1F2F2]">WAVES</span> <br/>
+                    FEARLESSLY.
+                </h1>
+                
+                <p class="text-gray-300 text-lg md:text-xl font-medium mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                    Ekosistem perlengkapan selancar pintar pertama di dunia. Dirancang untuk performa maksimal dan perlindungan absolut bagi keluarga Anda.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#katalog" class="w-full sm:w-auto bg-[#51B5B3] text-[#1C3B5E] px-8 py-4 rounded-full font-black text-sm hover:bg-white transition-all duration-300 inline-flex items-center justify-center uppercase tracking-widest shadow-[0_0_20px_rgba(81,181,179,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] group hover:-translate-y-1">
+                        Jelajahi Sekarang
+                        <i data-lucide="arrow-right" class="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform"></i>
+                    </a>
+                </div>
             </div>
 
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white drop-shadow-lg uppercase">
-                <span class="text-white">WAVE</span><span class="text-[#51B5B3]">GUARD</span>
-            </h1>
-            <p class="mt-4 text-xl md:text-2xl text-gray-200 font-light max-w-2xl mx-auto mb-12 drop-shadow-md">
-                Perlengkapan premium untuk setiap penakluk ombak. Aman, tangguh, dan berstandar profesional.
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#katalog" class="w-full sm:w-auto bg-[#51B5B3] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#1C3B5E] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 inline-flex items-center justify-center group uppercase tracking-wide">
-                    Beli Sekarang
-                    <i data-lucide="shopping-bag" class="ml-2 w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                </a>
+            <!-- Image Content (Kanan) -->
+            <div class="w-full lg:w-[45%] flex justify-center mt-16 lg:mt-0 relative">
+                <!-- Glowing Backdrop -->
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-[#51B5B3] rounded-full blur-[100px] opacity-40 animate-pulse"></div>
+                
+                <div class="relative w-full max-w-lg z-10 animate-float">
+                    <!-- Main Product Image -->
+                    <img src="https://drive.google.com/thumbnail?id=1fHNJwrKL5KlBhDDCwFfX7zER7UWdFcDD&sz=w1000" alt="Waveguard Hero Product" class="w-full h-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)] relative z-10">
+                    
+                    <!-- Floating Tech Badges -->
+                    <div class="absolute top-4 -left-4 md:-left-12 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-3 animate-bounce z-20" style="animation-duration: 3.5s;">
+                        <div class="bg-[#1C3B5E] p-2 rounded-full text-[#51B5B3]"><i data-lucide="satellite" class="w-4 h-4"></i></div>
+                        <div>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider leading-tight">Pelacakan</p>
+                            <p class="text-sm font-extrabold text-[#1C3B5E] leading-tight">Live GPS</p>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-2 -right-4 md:bottom-4 md:-right-6 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-3 animate-bounce z-20" style="animation-duration: 4.2s;">
+                        <div class="bg-[#51B5B3] p-2 rounded-full text-white"><i data-lucide="shield-alert" class="w-4 h-4"></i></div>
+                        <div>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider leading-tight">Sensor</p>
+                            <p class="text-sm font-extrabold text-[#1C3B5E] leading-tight">UV Alert</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         </div>
     </section>
 
-    <!-- Trust Badges (Commercial Element) -->
-    <div class="bg-white border-b border-gray-200 py-6 shadow-sm relative z-20">
+    <!-- Trust Badges -->
+    <div class="bg-gray-50 border-b border-gray-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center divide-x divide-gray-100">
-                <div class="flex flex-col items-center justify-center p-2">
-                    <i data-lucide="truck" class="w-6 h-6 text-[#1C3B5E] mb-2"></i>
-                    <span class="text-xs md:text-sm font-bold text-gray-800 mt-1">Gratis Ongkir</span>
-                    <span class="text-[10px] md:text-xs text-gray-500 hidden sm:block">Ke seluruh Indonesia</span>
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center divide-x divide-gray-200">
                 <div class="flex flex-col items-center justify-center p-2">
                     <i data-lucide="shield-check" class="w-6 h-6 text-[#1C3B5E] mb-2"></i>
-                    <span class="text-xs md:text-sm font-bold text-gray-800 mt-1">Garansi Resmi</span>
-                    <span class="text-[10px] md:text-xs text-gray-500 hidden sm:block">1 Tahun pemakaian</span>
+                    <span class="text-xs md:text-sm font-bold text-gray-800">100% Aman</span>
+                    <span class="text-[10px] text-gray-500">Standar Keselamatan Tinggi</span>
                 </div>
                 <div class="flex flex-col items-center justify-center p-2">
-                    <i data-lucide="credit-card" class="w-6 h-6 text-[#1C3B5E] mb-2"></i>
-                    <span class="text-xs md:text-sm font-bold text-gray-800 mt-1">Cicilan 0%</span>
-                    <span class="text-[10px] md:text-xs text-gray-500 hidden sm:block">Pembayaran aman</span>
+                    <i data-lucide="sun" class="w-6 h-6 text-[#1C3B5E] mb-2"></i>
+                    <span class="text-xs md:text-sm font-bold text-gray-800">UPF 50+ Protection</span>
+                    <span class="text-[10px] text-gray-500">Pelindung Sinar UV Optimal</span>
+                </div>
+                <div class="flex flex-col items-center justify-center p-2">
+                    <i data-lucide="leaf" class="w-6 h-6 text-[#1C3B5E] mb-2"></i>
+                    <span class="text-xs md:text-sm font-bold text-gray-800">Eco-Friendly</span>
+                    <span class="text-[10px] text-gray-500">Material Ramah Lingkungan</span>
                 </div>
                 <div class="flex flex-col items-center justify-center p-2">
                     <i data-lucide="award" class="w-6 h-6 text-[#1C3B5E] mb-2"></i>
-                    <span class="text-xs md:text-sm font-bold text-gray-800 mt-1">Kualitas Premium</span>
-                    <span class="text-[10px] md:text-xs text-gray-500 hidden sm:block">Material anti-UV & kuat</span>
+                    <span class="text-xs md:text-sm font-bold text-gray-800">Kualitas Premium</span>
+                    <span class="text-[10px] text-gray-500">Tahan Lama & Inovatif</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Tentang Kami (Lobby Section) -->
-    <section id="tentang-kami" class="py-24 bg-[#FAFAFA] relative overflow-hidden border-b border-gray-100">
-        <!-- Dekorasi Latar -->
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-[#E1F2F2] rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-[#F4E7CE] rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <!-- Text Content -->
-                <div class="w-full lg:w-1/2">
-                    <h2 class="text-sm font-bold tracking-widest text-[#51B5B3] uppercase mb-2">Tentang Waveguard</h2>
-                    <h3 class="text-3xl md:text-5xl font-extrabold text-[#1C3B5E] leading-tight mb-6">Penjaga Setia Keluarga Anda di Setiap Ombak</h3>
-                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
-                        Kami percaya bahwa lautan adalah taman bermain terbaik. Namun, kami juga mengerti kecemasan yang datang bersamanya. <strong>WAVEGUARD</strong> lahir dari dedikasi untuk menggabungkan kecintaan pada selancar dengan inovasi keselamatan tingkat tinggi.
-                    </p>
-                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
-                        Bukan sekadar toko perlengkapan pantai, kami adalah pelopor teknologi keselamatan air. Mulai dari rompi berpelacak GPS untuk si kecil hingga <i>leash</i> penangkal hiu untuk peselancar pro, misi kami sederhana: <span class="font-semibold text-[#1C3B5E]">Memastikan Anda pulang dengan senyum dan cerita indah, bukan kekhawatiran.</span>
-                    </p>
-                    
-                    <!-- Social Proof / Community -->
-                    <div class="flex items-center space-x-5 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 inline-flex">
-                        <div class="flex -space-x-3">
-                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Peselancar 1">
-                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Peselancar 2">
-                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Peselancar 3">
-                        </div>
-                        <div class="text-sm">
-                            <span class="block font-bold text-[#1C3B5E] text-base">Dipercaya 10.000+</span>
-                            <span class="text-gray-500 font-medium">Peselancar & Keluarga</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image/Visual Content -->
-                <div class="w-full lg:w-1/2 relative mt-10 lg:mt-0">
-                    <!-- Accent background block -->
-                    <div class="absolute inset-0 bg-[#51B5B3] transform translate-x-4 translate-y-4 rounded-3xl opacity-20"></div>
-                    
-                    <!-- Main Image -->
-                    <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Keluarga di Pantai" class="relative z-10 rounded-3xl shadow-2xl object-cover h-[450px] md:h-[550px] w-full border-4 border-white">
-                    
-                    <!-- Floating Badge -->
-                    <div class="absolute -bottom-6 -left-6 md:-left-10 bg-white p-5 md:p-6 rounded-2xl shadow-xl z-20 flex items-center space-x-4 border border-gray-100 animate-bounce" style="animation-duration: 3s;">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-[#F4E7CE] rounded-full flex items-center justify-center shrink-0">
-                            <i data-lucide="shield-check" class="w-6 h-6 md:w-8 md:h-8 text-[#1C3B5E]"></i>
-                        </div>
-                        <div>
-                            <span class="block text-xl md:text-2xl font-extrabold text-[#1C3B5E]">100%</span>
-                            <span class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider">Standar Aman</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Marketplace Catalog Section -->
+    <section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mb-20 mt-10">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#1C3B5E] uppercase tracking-wider mb-4">Katalog Ekosistem Waveguard</h2>
+            <div class="w-24 h-1 bg-[#51B5B3] mx-auto"></div>
         </div>
-    </section>
 
-    <!-- Featured Product Section -->
-    <section id="unggulan" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-sm font-bold tracking-widest text-[#51B5B3] uppercase mb-2">Produk Utama Kami</h2>
-                <h3 class="text-3xl md:text-4xl font-extrabold text-[#1C3B5E]">Inovasi Keamanan Anak di Air</h3>
-                <div class="w-24 h-1 bg-[#51B5B3] mx-auto mt-6 rounded-full"></div>
-            </div>
-
-            <div class="flex flex-col lg:flex-row items-center bg-[#F4E7CE] rounded-3xl overflow-hidden shadow-xl border border-[#E1F2F2]">
-                <div class="w-full lg:w-1/2 p-10 lg:p-16 flex justify-center bg-gradient-to-br from-[#E1F2F2] to-[#51B5B3]/30 relative">
-                    <!-- Decorative Circle -->
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div class="w-64 h-64 border-4 border-white/40 rounded-full"></div>
-                    </div>
-                    <!-- Icon Placeholder for Vest -->
-                    <div class="relative z-10 w-64 h-64 bg-white rounded-full shadow-2xl flex items-center justify-center transform hover:scale-105 transition duration-500 border-8 border-[#1C3B5E]">
-                        <i data-lucide="life-buoy" class="w-32 h-32 text-[#51B5B3]"></i>
-                        <!-- GPS Ping Dot -->
-                        <div class="absolute top-10 right-14 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
-                        <div class="absolute top-10 right-14 w-4 h-4 bg-red-500 rounded-full"></div>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 p-10 lg:p-16">
-                    <div class="inline-block bg-[#1C3B5E] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-4">Best Seller</div>
-                    <h4 class="text-3xl font-bold text-[#1C3B5E] mb-4">Surf-Buddy Smart Vest <span class="text-xl text-gray-600 font-normal block mt-1">- Junior (Anak)</span></h4>
-                    <p class="text-gray-700 mb-6 text-lg">Rompi pelampung revolusioner yang didesain khusus untuk anak-anak. Dilengkapi dengan pelacak GPS terintegrasi yang terhubung ke smartphone orang tua, memberikan ketenangan pikiran saat si kecil menaklukkan ombak.</p>
-                    
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle" class="w-5 h-5 text-[#51B5B3] mr-3"></i> Daya apung maksimal bersertifikat</li>
-                        <li class="flex items-center text-gray-700"><i data-lucide="map-pin" class="w-5 h-5 text-[#51B5B3] mr-3"></i> Pelacakan GPS real-time via Aplikasi</li>
-                        <li class="flex items-center text-gray-700"><i data-lucide="shield-check" class="w-5 h-5 text-[#51B5B3] mr-3"></i> Material anti-iritasi & cepat kering</li>
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Left Sidebar (Filters) -->
+            <div class="w-full md:w-1/4 flex-shrink-0 hidden md:block">
+                <div class="sticky top-40 bg-gray-50 p-6 rounded-xl border border-gray-100">
+                    <h4 class="font-bold text-lg text-gray-900 mb-6 uppercase tracking-wider border-b border-gray-200 pb-2">Kategori Produk</h4>
+                    <ul class="space-y-4">
+                        <li>
+                            <button class="sidebar-filter active text-gray-800 hover:text-[#51B5B3] font-bold text-sm transition flex items-center justify-between w-full text-left" data-filter="semua">
+                                Semua Produk <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="sidebar-filter text-gray-500 hover:text-[#51B5B3] font-medium text-sm transition flex items-center justify-between w-full text-left" data-filter="pakaian">
+                                Pakaian & Pelindung <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="sidebar-filter text-gray-500 hover:text-[#51B5B3] font-medium text-sm transition flex items-center justify-between w-full text-left" data-filter="gear">
+                                Papan & Tas <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="sidebar-filter text-gray-500 hover:text-[#51B5B3] font-medium text-sm transition flex items-center justify-between w-full text-left" data-filter="aksesoris">
+                                Aksesoris <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                            </button>
+                        </li>
                     </ul>
-                    
-                    <div class="flex items-center justify-between">
-                        <span class="text-3xl font-extrabold text-[#1C3B5E]">Rp 1.500.000</span>
-                        <button onclick="addToCart(9)" class="bg-[#51B5B3] hover:bg-[#1C3B5E] text-white px-6 py-3 rounded-xl font-bold transition duration-300 flex items-center shadow-lg hover:shadow-xl">
-                            <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i> Tambah
-                        </button>
-                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Product Catalog Section -->
-    <section id="katalog" class="py-20 bg-[#FAFAFA]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <h2 class="text-sm font-bold tracking-widest text-[#51B5B3] uppercase mb-2">Katalog Lengkap</h2>
-                    <h3 class="text-3xl md:text-4xl font-extrabold text-[#1C3B5E]">Persiapan Ke Pantai</h3>
-                </div>
+            <!-- Right Main Content (Products Grid) -->
+            <div class="w-full md:w-3/4">
                 
-                <!-- Filters -->
-                <div class="mt-6 md:mt-0 flex space-x-2 overflow-x-auto no-scrollbar pb-2">
-                    <button class="filter-btn active px-5 py-2 rounded-full bg-[#1C3B5E] text-white font-semibold whitespace-nowrap text-sm" data-filter="semua">Semua</button>
-                    <button class="filter-btn px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-[#F4E7CE] hover:text-[#1C3B5E] hover:border-[#F4E7CE] transition font-semibold whitespace-nowrap text-sm" data-filter="pria">Pria</button>
-                    <button class="filter-btn px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-[#F4E7CE] hover:text-[#1C3B5E] hover:border-[#F4E7CE] transition font-semibold whitespace-nowrap text-sm" data-filter="wanita">Wanita</button>
-                    <button class="filter-btn px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-[#F4E7CE] hover:text-[#1C3B5E] hover:border-[#F4E7CE] transition font-semibold whitespace-nowrap text-sm" data-filter="anak">Anak</button>
+                <!-- Sort & Mobile Filter Bar -->
+                <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-200">
+                    <span class="text-sm text-gray-500 font-medium" id="product-count">Menampilkan 10 Produk</span>
+                    <div class="flex items-center space-x-4">
+                        <select class="text-sm border-gray-300 rounded-lg bg-gray-50 text-gray-700 py-2 pl-3 pr-8 focus:outline-none focus:ring-1 focus:ring-[#51B5B3] focus:border-[#51B5B3] cursor-pointer font-medium">
+                            <option>Urutkan: Rekomendasi</option>
+                            <option>Harga: Rendah - Tinggi</option>
+                            <option>Harga: Tinggi - Rendah</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Product Grid -->
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Products injected by JS -->
+                <!-- Product Grid (Clothing Brand Style) -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+                    <!-- Products injected by JS -->
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Values Section -->
-    <section class="py-16 bg-[#1C3B5E] text-white">
+    <!-- Footer E-commerce -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-[#51B5B3]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-                <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-                    <div class="w-16 h-16 mx-auto bg-[#51B5B3] rounded-full flex items-center justify-center mb-6 text-white shadow-lg">
-                        <i data-lucide="shield" class="w-8 h-8"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+                
+                <!-- Brand & Newsletter -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <div class="w-8 h-8 mr-2 relative flex items-center justify-center bg-white rounded-md p-1">
+                            <img src="https://drive.google.com/thumbnail?id=1D3Vif2sLcKLJxDYZCyW2SaYzEgNENV-0&sz=w200" alt="Waveguard Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-2xl font-extrabold tracking-tight uppercase">WAVEGUARD</span>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">Keamanan Nomor 1</h4>
-                    <p class="text-blue-100/80 text-sm">Produk kami didesain mengutamakan keselamatan tanpa mengorbankan performa saat berselancar.</p>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Berlangganan buletin kami untuk penawaran eksklusif, rilis ekosistem baru, dan tips keamanan berselancar bersama keluarga.</p>
+                    <form class="flex" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');">
+                        <input type="email" placeholder="Alamat Email Anda" class="w-full bg-gray-800 border border-gray-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#51B5B3]" required>
+                        <button type="submit" class="bg-[#51B5B3] hover:bg-white hover:text-gray-900 text-white px-6 py-3 font-bold transition-colors uppercase text-sm tracking-wider">Daftar</button>
+                    </form>
                 </div>
-                <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-                    <div class="w-16 h-16 mx-auto bg-[#51B5B3] rounded-full flex items-center justify-center mb-6 text-white shadow-lg">
-                        <i data-lucide="sun" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Perlindungan UV</h4>
-                    <p class="text-blue-100/80 text-sm">Pakaian inovatif dengan sensor dan material premium untuk melindungi kulit Anda dari sengatan matahari.</p>
-                </div>
-                <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-                    <div class="w-16 h-16 mx-auto bg-[#51B5B3] rounded-full flex items-center justify-center mb-6 text-white shadow-lg">
-                        <i data-lucide="waves" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Desain Pro & Junior</h4>
-                    <p class="text-blue-100/80 text-sm">Menyediakan ukuran dan fitur spesifik untuk kebutuhan peselancar dewasa hingga anak-anak.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="col-span-1 md:col-span-2">
-                <div class="flex items-center mb-4">
-                    <div class="w-8 h-8 mr-2 relative flex items-center justify-center">
-                        <img src="https://drive.google.com/thumbnail?id=1D3Vif2sLcKLJxDYZCyW2SaYzEgNENV-0&sz=w400" alt="Waveguard Logo Footer" class="w-full h-full object-contain brightness-0 invert opacity-90">
+                <!-- Links 1 -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-gray-300">Ekosistem</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Smart Vest</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pakaian Anti UV</a></li>
+                        <li><a href="#" class="hover:text-white transition">Softboard Pemula</a></li>
+                        <li><a href="#" class="hover:text-white transition">Aksesoris Pengaman</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 2 -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-gray-300">Layanan</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Cara Kerja Sensor GPS</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pengiriman & Pengembalian</a></li>
+                        <li><a href="#" class="hover:text-white transition">Panduan Ukuran</a></li>
+                        <li><a href="#" class="hover:text-white transition">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 3 -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-gray-300">Ikuti Kami</h4>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#51B5B3] hover:text-white transition text-gray-400"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#51B5B3] hover:text-white transition text-gray-400"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#51B5B3] hover:text-white transition text-gray-400"><i data-lucide="youtube" class="w-5 h-5"></i></a>
                     </div>
-                    <span class="text-xl font-extrabold tracking-tight">
-                        <span class="text-white">WAVE</span><span class="text-[#51B5B3]">GUARD</span>
-                    </span>
-                </div>
-                <p class="text-sm text-gray-400 max-w-sm mb-6">Mitra terpercaya Anda untuk perlengkapan selancar yang aman, nyaman, dan berteknologi tinggi untuk seluruh anggota keluarga.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-[#51B5B3]"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-[#51B5B3]"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-[#51B5B3]"><i data-lucide="twitter" class="w-5 h-5"></i></a>
                 </div>
             </div>
-            <div>
-                <h5 class="text-white font-bold mb-4">Tautan Cepat</h5>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#beranda" class="hover:text-[#51B5B3] transition">Beranda</a></li>
-                    <li><a href="#katalog" class="hover:text-[#51B5B3] transition">Katalog Produk</a></li>
-                    <li><a href="#" class="hover:text-[#51B5B3] transition">Panduan Ukuran</a></li>
-                    <li><a href="#" class="hover:text-[#51B5B3] transition">Kebijakan Pengembalian</a></li>
-                </ul>
+
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2026 WAVEGUARD SURF CO. Adaptive Surfing Gear.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-white">Syarat & Ketentuan</a>
+                </div>
             </div>
-            <div>
-                <h5 class="text-white font-bold mb-4">Kontak</h5>
-                <ul class="space-y-2 text-sm text-gray-400">
-                    <li class="flex items-center"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> hello@waveguard.id</li>
-                    <li class="flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-2"></i> +62 812-3456-7890</li>
-                    <li class="flex items-center items-start"><i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-1 shrink-0"></i> Pantai Kuta, Bali, Indonesia</li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-sm text-center">
-            &copy; 2026 Waveguard Surf Co. All rights reserved.
         </div>
     </footer>
 
+    <!-- UI Overlays & Modals -->
+    <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity" onclick="closeAllModals()"></div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-[#1C3B5E] text-white">
+            <h2 class="text-lg font-bold flex items-center"><i data-lucide="shopping-bag" class="w-5 h-5 mr-2"></i> Tas Belanja</h2>
+            <button onclick="toggleCart()" class="hover:text-[#51B5B3] transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <div id="cart-items" class="flex-grow overflow-y-auto p-5 space-y-4 bg-gray-50">
+            <!-- Cart items will be rendered here -->
+        </div>
+        <div class="p-5 border-t border-gray-200 bg-white shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)]">
+            <div class="flex justify-between mb-4 font-bold text-lg text-[#1C3B5E]">
+                <span>Total:</span>
+                <span id="cart-total">Rp 0</span>
+            </div>
+            <button onclick="processCheckout()" class="w-full bg-[#51B5B3] hover:bg-[#1C3B5E] text-white py-3.5 rounded-lg font-bold uppercase tracking-wider transition-colors shadow-lg flex justify-center items-center">
+                Checkout Sekarang
+            </button>
+        </div>
+    </div>
+
+    <!-- Account Sidebar (Order History) -->
+    <div id="account-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-white z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-[#1C3B5E] text-white">
+            <h2 class="text-lg font-bold flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2"></i> Akun & Pesanan</h2>
+            <button onclick="toggleAccount()" class="hover:text-[#51B5B3] transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <div class="p-5 flex-grow overflow-y-auto">
+            <div class="mb-6 flex items-center space-x-4 bg-gradient-to-r from-gray-50 to-[#E1F2F2] p-4 rounded-xl border border-gray-100">
+                <div class="w-14 h-14 bg-[#1C3B5E] rounded-full flex items-center justify-center text-white font-extrabold text-2xl shadow-inner">W</div>
+                <div>
+                    <h3 class="font-bold text-[#1C3B5E] text-lg">Waveguard Surfer</h3>
+                    <p class="text-xs text-[#51B5B3] font-bold uppercase tracking-wider">Member Premium</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center mb-4 border-b border-gray-200 pb-2">
+                <h3 class="font-bold text-gray-900">Riwayat Pesanan</h3>
+                <button onclick="clearOrders()" class="text-xs text-red-500 hover:underline">Hapus Riwayat</button>
+            </div>
+            
+            <div id="order-history" class="space-y-4 pb-10">
+                <!-- Orders will be rendered here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Container -->
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[60] flex flex-col gap-2"></div>
 
     <script>
-        // Inisialisasi Lucide Icons
+        // Initialize Icons
         lucide.createIcons();
 
-        // Data Produk Berdasarkan Prompt
+        // Data Ekosistem 10 Produk Waveguard
         const products = [
-            { id: 1, name: "Shark Repellent Leash - Pro", category: "pria", price: 750000, icon: "activity", color: "bg-blue-100", textColor: "text-blue-600", desc: "Desain lebih panjang & kuat untuk ombak besar." },
-            { id: 2, name: "Shark Repellent Leash - Junior", category: "anak", price: 550000, icon: "activity", color: "bg-yellow-100", textColor: "text-yellow-600", desc: "Warna neon cerah, strap kecil untuk kaki anak." },
-            { id: 3, name: "UV-Alert Rash Guard - Women Edition", category: "wanita", price: 450000, icon: "shirt", color: "bg-pink-100", textColor: "text-pink-600", desc: "Slim-fit stylish dengan sensor UV di bahu." },
-            { id: 4, name: "UV-Alert Rash Guard - Kids Edition", category: "anak", price: 350000, icon: "shirt", color: "bg-orange-100", textColor: "text-orange-500", desc: "Motif kartun laut yang berubah warna." },
-            { id: 5, name: "Performance Wood-Fiber Board", category: "pria", price: 8500000, icon: "waves", color: "bg-amber-100", textColor: "text-amber-700", desc: "Longboard/shortboard daya apung maksimal." },
-            { id: 6, name: "Soft-Top Safety Board", category: "anak", price: 4200000, icon: "waves", color: "bg-green-100", textColor: "text-green-600", desc: "Bahan busa empuk aman untuk kepala anak." },
-            { id: 7, name: "Surf Poncho - Quick Dry", category: "wanita", price: 300000, icon: "droplets", color: "bg-purple-100", textColor: "text-purple-600", desc: "Panjang ekstra untuk privasi, material ultra-ringan." },
-            { id: 8, name: "Surf Poncho - Character", category: "anak", price: 250000, icon: "smile", color: "bg-teal-100", textColor: "text-teal-600", desc: "Hoodie sirip hiu/hewan laut, tetap hangat." },
-            { id: 9, name: "Surf-Buddy Smart Vest - Junior", category: "anak", price: 1500000, icon: "life-buoy", color: "bg-red-100", textColor: "text-red-500", desc: "Rompi pelampung dengan pelacak GPS." },
-            { id: 10, name: "Surf-Buddy Safety Belt", category: "pria wanita", price: 1200000, icon: "voicemail", color: "bg-slate-200", textColor: "text-slate-700", desc: "Sabuk minimalis, mengembang otomatis darurat." }
+            { id: 1, name: "Surf-Buddy Smart Vest", category: "pakaian", price: 1850000, desc: "Pelampung selancar revolusioner khusus anak. GPS & Emergency Water-Trigger.", img: "https://drive.google.com/thumbnail?id=1IkIly3RprRQNYsL-j3OBsYak8zRRJGQX&sz=w600", isNew: true },
+            { id: 2, name: "UV-Alert Rash Guard", category: "pakaian", price: 550000, desc: "Eco-friendly spandex UPF 50+. Tinta thermochromic UV-reactive (berubah merah saat UV berbahaya).", img: "https://drive.google.com/thumbnail?id=1UANQhcgBfhThsDnyU7aU_Jk13hSW-8ug&sz=w600", isNew: false },
+            { id: 3, name: "Quick-Dry Character Poncho", category: "pakaian", price: 395000, desc: "Ponco microfiber ultra-absorbent. Kering 3x lebih cepat, desain karakter lucu.", img: "https://drive.google.com/thumbnail?id=1KD2_JuZdph_A-uJm8opdAbed_Hiot_mG&sz=w600", isNew: false },
+            { id: 4, name: "Waterproof Tech-Box", category: "aksesoris", price: 275000, desc: "Rigid drawer box kedap air (IPX7 Rated). Reusable sebagai brankas di pantai.", img: "https://drive.google.com/thumbnail?id=15upEF2yDz0zGxDq1BVgkNuXZNxBzrRhn&sz=w600", isNew: true },
+            { id: 5, name: "Aqua-Grip Smart Booties", category: "pakaian", price: 425000, desc: "Sepatu pelindung karang anti-slip micro-suction. Neoprene 3mm yang ringan.", img: "https://drive.google.com/thumbnail?id=1jBCYQUux_JGuDGjQwPFynyHc-wBerNc5&sz=w600", isNew: false },
+            { id: 6, name: "Eco-Glide Junior Softboard", category: "gear", price: 3200000, desc: "Papan busa pemula material daur ulang. Volume ekstra stabil, EVA deck anti-memar.", img: "https://drive.google.com/thumbnail?id=1W7XcnK_pArZZr19nAsWpymlRvx1b1WxA&sz=w600", isNew: false },
+            { id: 7, name: "Tide-Tote Wet/Dry Bag", category: "gear", price: 650000, desc: "Tas pantai modular 2 kompartemen (basah & kering). Katup sirkulasi anti-odor.", img: "https://drive.google.com/thumbnail?id=1uUhphZ-PMEexhUxy7sERCGFiy-bnQJhy&sz=w600", isNew: false },
+            { id: 8, name: "Wave-Shield Mineral Zinc", category: "aksesoris", price: 195000, desc: "Sunscreen stik Zinc Oxide 100% Reef-Safe. Untuk kulit anak sensitif.", img: "https://drive.google.com/thumbnail?id=1TOmck6TlktH3h6Am0B9b0rbKJTObszEt&sz=w600", isNew: false },
+            { id: 9, name: "Goggle-Eye Surf Shades", category: "aksesoris", price: 350000, desc: "Kacamata anti-UV400 polarized. Strap neoprene elastis & otomatis mengapung.", img: "https://drive.google.com/thumbnail?id=1eo625TF-ZG4zHsn4g_MrTtY9Q9ghSLuM&sz=w600", isNew: false },
+            { id: 10, name: "Zen-Wave Ear Protectors", category: "aksesoris", price: 225000, desc: "Earplugs silikon medis ergonomis. Mencegah air masuk tapi bisa mendengar instruksi.", img: "https://drive.google.com/thumbnail?id=1EQafQEw1FPxqueduwrCCfAshxqOCLY1w&sz=w600", isNew: false }
         ];
 
-        // Format Mata Uang Rupiah
-        const formatRupiah = (number) => {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
-        };
+        // System Variables (Local Storage)
+        let cart = JSON.parse(localStorage.getItem('wg_cart')) || [];
+        let orders = JSON.parse(localStorage.getItem('wg_orders')) || [];
+        let currentFilter = 'semua';
+        let searchQuery = '';
 
-        const grid = document.getElementById('product-grid');
+        const formatRupiah = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
 
-        // Render Produk
-        function renderProducts(filter = 'semua') {
+        // Render Catalog Grid
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
             
-            const filteredProducts = filter === 'semua' 
-                ? products 
-                : products.filter(p => p.category.includes(filter));
+            // Filter by category and search query
+            const filteredProducts = products.filter(p => {
+                const matchCategory = currentFilter === 'semua' || p.category === currentFilter;
+                const matchSearch = p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+                return matchCategory && matchSearch;
+            });
+            
+            document.getElementById('product-count').innerText = `Menampilkan ${filteredProducts.length} Produk`;
+
+            if(filteredProducts.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 font-medium">Produk tidak ditemukan.</div>`;
+                return;
+            }
 
             filteredProducts.forEach(product => {
-                // Tentukan label badge
-                let badge = '';
-                if(product.category.includes('anak')) badge = '<span class="absolute top-3 left-3 bg-gray-900 text-white text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider z-10">Anak</span>';
-                else if(product.category.includes('wanita')) badge = '<span class="absolute top-3 left-3 bg-gray-900 text-white text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider z-10">Wanita</span>';
-                else if(product.category.includes('pria')) badge = '<span class="absolute top-3 left-3 bg-gray-900 text-white text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider z-10">Pria</span>';
-                
-                // Jika produk utama/bestseller
-                if(product.id === 9) badge += '<span class="absolute top-3 right-3 bg-[#51B5B3] text-white text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider z-10">Terlaris</span>';
+                let badge = product.isNew ? '<span class="absolute top-3 left-3 bg-[#1C3B5E] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider z-10 rounded-sm shadow-md">Inovasi Baru</span>' : '';
 
-                const card = `
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden flex flex-col group h-full relative">
-                        ${badge}
-                        <!-- Image/Icon Area (Commercial Style) -->
-                        <div class="h-64 bg-gray-50 flex items-center justify-center relative overflow-hidden group-hover:bg-gray-100 transition-colors border-b border-gray-100">
-                            <!-- Subtle Background Logo for Premium feel -->
-                            <i data-lucide="shield" class="absolute w-40 h-40 text-gray-200 opacity-40 transform -rotate-12"></i>
-                            
-                            <!-- Main Product Icon -->
-                            <i data-lucide="${product.icon}" class="w-24 h-24 text-[#1C3B5E] transform group-hover:scale-110 transition-transform duration-500 relative z-10 drop-shadow-md"></i>
-                            
-                            <!-- Overlay CTA -->
-                            <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/50 to-transparent flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 h-1/3">
-                                <button onclick="addToCart(${product.id})" class="w-full bg-white text-[#1C3B5E] font-bold py-2 rounded shadow-lg flex items-center justify-center text-sm hover:bg-[#51B5B3] hover:text-white transition-colors">
-                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-2"></i> Tambah ke Keranjang
-                                </button>
-                            </div>
+                grid.innerHTML += `
+                    <div class="product-card group relative bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+                        <div class="relative w-full h-64 bg-gray-100 overflow-hidden flex items-center justify-center p-4">
+                            ${badge}
+                            <img src="${product.img}" alt="${product.name}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 mix-blend-multiply">
+                            <button onclick="addToCart(${product.id})" class="add-to-cart-btn absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur text-[#1C3B5E] font-bold py-3 text-sm uppercase tracking-wider hover:bg-[#51B5B3] hover:text-white flex items-center justify-center transition-colors shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                                <i data-lucide="shopping-bag" class="w-4 h-4 mr-2"></i> Tambah ke Tas
+                            </button>
                         </div>
-                        
-                        <!-- Content Area -->
-                        <div class="p-5 flex flex-col flex-grow bg-white">
-                            <h4 class="font-bold text-gray-900 text-lg leading-snug mb-2 flex-grow">${product.name}</h4>
-                            <p class="text-xs text-gray-500 mb-4 line-clamp-2">${product.desc}</p>
-                            <div class="flex items-end justify-between mt-auto pt-4 border-t border-gray-100">
-                                <div>
-                                    <span class="block text-[10px] text-gray-400 uppercase tracking-wider mb-1">Harga</span>
-                                    <span class="font-bold text-[#1C3B5E] text-xl">${formatRupiah(product.price)}</span>
-                                </div>
+                        <div class="p-6 flex flex-col flex-grow bg-white z-10">
+                            <h3 class="text-lg font-extrabold text-[#1C3B5E] mb-2 leading-snug cursor-pointer hover:text-[#51B5B3]">${product.name}</h3>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-3 leading-relaxed flex-grow">${product.desc}</p>
+                            <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                                <span class="text-xl font-bold text-[#51B5B3]">${formatRupiah(product.price)}</span>
+                                <button onclick="addToCart(${product.id})" class="w-8 h-8 rounded-full bg-gray-50 text-[#1C3B5E] flex items-center justify-center hover:bg-[#1C3B5E] hover:text-white transition">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 `;
-                grid.innerHTML += card;
             });
-            
-            // Re-inisialisasi icon di dalam grid baru
             lucide.createIcons();
         }
 
-        // Fitur Filter
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // Remove active classes
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-[#1C3B5E]', 'text-white', 'active');
-                    b.classList.add('bg-white', 'text-gray-600');
-                });
-                
-                // Add active class to clicked
-                e.target.classList.remove('bg-white', 'text-gray-600');
-                e.target.classList.add('bg-[#1C3B5E]', 'text-white', 'active');
-                
-                const filterValue = e.target.getAttribute('data-filter');
-                renderProducts(filterValue);
+        // Search Functionality
+        const handleSearch = (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            renderProducts();
+        };
+        document.getElementById('desktop-search').addEventListener('input', handleSearch);
+        document.getElementById('mobile-search').addEventListener('input', handleSearch);
+
+        // Filter Category
+        window.filterCategory = function(filterValue) {
+            currentFilter = filterValue;
+            const sidebarBtns = document.querySelectorAll('.sidebar-filter');
+            sidebarBtns.forEach(b => {
+                if(b.getAttribute('data-filter') === filterValue) {
+                    b.classList.add('text-gray-800', 'font-bold', 'active');
+                    b.classList.remove('text-gray-500', 'font-medium');
+                } else {
+                    b.classList.remove('text-gray-800', 'font-bold', 'active');
+                    b.classList.add('text-gray-500', 'font-medium');
+                }
             });
-        });
+            renderProducts();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        };
 
-        // Simulasi Keranjang Belanja
-        let cartCount = 0;
-        const cartBadge = document.getElementById('cart-count');
+        // Modal Toggles Logic
+        const overlay = document.getElementById('overlay');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const accountSidebar = document.getElementById('account-sidebar');
 
-        function addToCart(id) {
-            cartCount++;
+        window.toggleCart = () => {
+            const isOpen = !cartSidebar.classList.contains('translate-x-full');
+            closeAllModals();
+            if (!isOpen) {
+                cartSidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                renderCartUI();
+            }
+        };
+
+        window.toggleAccount = () => {
+            const isOpen = !accountSidebar.classList.contains('translate-x-full');
+            closeAllModals();
+            if (!isOpen) {
+                accountSidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                renderOrdersUI();
+            }
+        };
+
+        window.closeAllModals = () => {
+            cartSidebar.classList.add('translate-x-full');
+            accountSidebar.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+        };
+
+        // Cart State Management
+        window.addToCart = function(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
             
-            // Update badge UI
-            cartBadge.textContent = cartCount;
-            cartBadge.classList.remove('opacity-0');
-            cartBadge.classList.add('opacity-100');
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
             
-            // Animasi bump
+            updateCartStorage();
+            showToast(`${product.name} ditambahkan!`);
+            
+            // Pop animation on icon
+            const cartBadge = document.getElementById('cart-count');
             cartBadge.classList.add('scale-125');
             setTimeout(() => cartBadge.classList.remove('scale-125'), 200);
-
-            // Dapatkan detail produk
-            const product = products.find(p => p.id === id);
-            showToast(`${product.name} ditambahkan ke keranjang!`);
         }
 
+        window.updateQty = (id, change) => {
+            const item = cart.find(i => i.id === id);
+            if(item) {
+                item.qty += change;
+                if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
+                updateCartStorage();
+                renderCartUI();
+            }
+        }
+
+        function updateCartStorage() {
+            localStorage.setItem('wg_cart', JSON.stringify(cart));
+            
+            // Update Icon Badge
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const cartBadge = document.getElementById('cart-count');
+            cartBadge.textContent = totalItems;
+            if (totalItems > 0) {
+                cartBadge.classList.remove('opacity-0');
+            } else {
+                cartBadge.classList.add('opacity-0');
+            }
+        }
+
+        function renderCartUI() {
+            const cartContainer = document.getElementById('cart-items');
+            cartContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-gray-400">
+                        <i data-lucide="shopping-cart" class="w-16 h-16 mb-4 opacity-50"></i>
+                        <p class="font-medium">Keranjang masih kosong</p>
+                    </div>`;
+                document.getElementById('cart-total').innerText = 'Rp 0';
+                lucide.createIcons();
+                return;
+            }
+
+            let total = 0;
+            cart.forEach(item => {
+                total += (item.price * item.qty);
+                cartContainer.innerHTML += `
+                    <div class="flex bg-white p-3 rounded-xl border border-gray-100 shadow-sm items-center">
+                        <img src="${item.img}" class="w-16 h-16 object-contain mix-blend-multiply bg-gray-50 rounded-lg p-1">
+                        <div class="ml-4 flex-grow">
+                            <h4 class="text-sm font-bold text-[#1C3B5E] leading-tight">${item.name}</h4>
+                            <p class="text-xs font-bold text-[#51B5B3] mt-1">${formatRupiah(item.price)}</p>
+                            <div class="flex items-center mt-2 space-x-3">
+                                <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-bold text-gray-600">-</button>
+                                <span class="text-sm font-bold w-4 text-center">${item.qty}</span>
+                                <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-bold text-gray-600">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total').innerText = formatRupiah(total);
+            lucide.createIcons();
+        }
+
+        // Checkout Process (Dummy)
+        window.processCheckout = () => {
+            if (cart.length === 0) {
+                alert("Keranjang belanja masih kosong!"); return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            // Create dummy order record
+            const newOrder = {
+                id: 'WG-' + Math.random().toString(36).substr(2, 8).toUpperCase(),
+                date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                items: [...cart],
+                total: total,
+                status: 'Sedang Diproses' // Dummy shipping status
+            };
+            
+            orders.unshift(newOrder); // Prepend to array
+            localStorage.setItem('wg_orders', JSON.stringify(orders));
+            
+            // Empty the cart
+            cart = [];
+            updateCartStorage();
+            
+            showToast("Pesanan Berhasil Dibuat!");
+            toggleAccount(); // Switch view to show the new order history
+        }
+
+        // Order History Rendering
+        function renderOrdersUI() {
+            const container = document.getElementById('order-history');
+            container.innerHTML = '';
+            
+            if (orders.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-500 py-6 text-sm font-medium">Belum ada riwayat pesanan.</div>`;
+                return;
+            }
+
+            orders.forEach(order => {
+                let itemsHTML = '';
+                order.items.forEach(item => {
+                    itemsHTML += `<div class="flex justify-between text-xs mb-1.5"><span class="text-gray-600 truncate pr-4">${item.qty}x ${item.name}</span><span class="font-bold">${formatRupiah(item.price * item.qty)}</span></div>`;
+                });
+
+                let statusColor = order.status === 'Sedang Diproses' ? 'bg-amber-100 text-amber-700' : 'bg-[#51B5B3]/20 text-[#1C3B5E]';
+
+                container.innerHTML += `
+                    <div class="bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-100">
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-medium">${order.date}</p>
+                                <p class="font-extrabold text-[#1C3B5E] text-sm">${order.id}</p>
+                            </div>
+                            <span class="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide ${statusColor}">${order.status}</span>
+                        </div>
+                        <div class="mb-3">
+                            ${itemsHTML}
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                            <span class="text-xs text-gray-500 font-medium">Total Pembayaran</span>
+                            <span class="font-bold text-[#51B5B3] text-sm">${formatRupiah(order.total)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.clearOrders = () => {
+            if(confirm("Apakah Anda yakin ingin menghapus semua riwayat pesanan dari perangkat ini?")) {
+                orders = [];
+                localStorage.removeItem('wg_orders');
+                renderOrdersUI();
+            }
+        }
+
+        // Global Toast Component
         function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            
-            toast.className = 'bg-[#1C3B5E] text-white px-5 py-3 rounded-lg shadow-xl flex items-center space-x-3 toast-enter border border-[#51B5B3]/30';
-            toast.innerHTML = `
-                <i data-lucide="check-circle" class="w-5 h-5 text-[#51B5B3]"></i>
-                <span class="text-sm font-medium">${message}</span>
-            `;
-            
+            toast.className = 'bg-white text-gray-900 px-5 py-3 shadow-2xl flex items-center space-x-3 toast-enter border-l-4 border-[#51B5B3] min-w-[250px] rounded-r-lg';
+            toast.innerHTML = `<i data-lucide="check-circle-2" class="w-5 h-5 text-[#51B5B3]"></i><span class="text-sm font-bold text-[#1C3B5E]">${message}</span>`;
             container.appendChild(toast);
             lucide.createIcons();
-
-            // Hapus toast setelah 3 detik
             setTimeout(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateY(10px)';
@@ -499,19 +703,8 @@
             }, 3000);
         }
 
-        // Animasi Navbar saat Scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.classList.add('shadow-md');
-                nav.classList.remove('shadow-sm');
-            } else {
-                nav.classList.add('shadow-sm');
-                nav.classList.remove('shadow-md');
-            }
-        });
-
-        // Inisialisasi Pertama
+        // Initialize App State
+        updateCartStorage();
         renderProducts();
 
     </script>
