@@ -39,14 +39,13 @@
             opacity: 1;
         }
 
-        /* Toast Animation */
+        /* Animations */
         @keyframes slideUpFade {
             0% { transform: translateY(20px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
         .toast-enter { animation: slideUpFade 0.3s ease-out forwards; }
         
-        /* Floating Animation for Hero Image */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
@@ -134,16 +133,13 @@
         </div>
     </nav>
 
-    <!-- Campaign Hero (Powerful Premium Vibe) -->
+    <!-- Campaign Hero -->
     <section class="relative min-h-[85vh] hero-campaign flex items-center py-20 overflow-hidden">
-        <!-- Dark gradient overlay for extreme contrast -->
         <div class="absolute inset-0 bg-gradient-to-r from-[#1C3B5E] via-[#1C3B5E]/90 to-transparent"></div>
         
         <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-16">
             
-            <!-- Text Content (Kiri) -->
             <div class="w-full lg:w-[55%] text-center lg:text-left mt-10 lg:mt-0">
-                <!-- Tech Badge -->
                 <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 mb-6">
                     <span class="w-2 h-2 rounded-full bg-[#51B5B3] animate-pulse"></span>
                     <span class="text-white text-xs font-bold tracking-[0.2em] uppercase">Era Baru Keselamatan Air</span>
@@ -167,16 +163,13 @@
                 </div>
             </div>
 
-            <!-- Image Content (Kanan) -->
+            <!-- Image Content with Watermark Cover Badge -->
             <div class="w-full lg:w-[45%] flex justify-center mt-16 lg:mt-0 relative">
-                <!-- Glowing Backdrop -->
                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-[#51B5B3] rounded-full blur-[100px] opacity-40 animate-pulse"></div>
                 
-                <div class="relative w-full max-w-lg z-10 animate-float">
-                    <!-- Main Product Image -->
+                <div class="relative w-full max-w-lg z-10 animate-float cursor-pointer" onclick="openProductDetail(1)">
                     <img src="https://drive.google.com/thumbnail?id=1fHNJwrKL5KlBhDDCwFfX7zER7UWdFcDD&sz=w1000" alt="Waveguard Hero Product" class="w-full h-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)] relative z-10">
                     
-                    <!-- Floating Tech Badges -->
                     <div class="absolute top-4 -left-4 md:-left-12 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-3 animate-bounce z-20" style="animation-duration: 3.5s;">
                         <div class="bg-[#1C3B5E] p-2 rounded-full text-[#51B5B3]"><i data-lucide="satellite" class="w-4 h-4"></i></div>
                         <div>
@@ -185,6 +178,7 @@
                         </div>
                     </div>
 
+                    <!-- Posisinya digeser ke kanan bawah (-right-4) untuk menutupi watermark -->
                     <div class="absolute bottom-2 -right-4 md:bottom-4 md:-right-6 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-3 animate-bounce z-20" style="animation-duration: 4.2s;">
                         <div class="bg-[#51B5B3] p-2 rounded-full text-white"><i data-lucide="shield-alert" class="w-4 h-4"></i></div>
                         <div>
@@ -194,7 +188,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </section>
 
@@ -226,7 +219,22 @@
         </div>
     </div>
 
-    <!-- Marketplace Catalog Section -->
+    <!-- Tentang Kami (Brand Story) -->
+    <section id="tentang-kami" class="py-20 bg-white border-b border-gray-100 text-center">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="w-12 h-12 mx-auto mb-6 opacity-30">
+                <img src="https://drive.google.com/thumbnail?id=1D3Vif2sLcKLJxDYZCyW2SaYzEgNENV-0&sz=w200" alt="Waveguard Logo" class="w-full h-full object-contain grayscale">
+            </div>
+            <h2 class="text-3xl font-extrabold text-[#1C3B5E] mb-6 uppercase tracking-widest">Tentang Waveguard</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                Lebih dari sekadar label pakaian selancar, kami lahir dari kebutuhan akan rasa aman di lautan. WAVEGUARD memadukan gaya hidup pesisir yang otentik dengan rekayasa perlengkapan keselamatan kelas dunia.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                Kami percaya Anda bisa tampil menawan menembus gulungan ombak, sambil memiliki kepastian bahwa peralatan yang Anda dan keluarga kenakan akan melindungi di saat-saat kritis. <strong>Safe surfing is stylish surfing.</strong>
+            </p>
+        </div>
+    </section>
+
     <section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mb-20 mt-10">
         
         <div class="text-center mb-12">
@@ -279,7 +287,6 @@
                     </div>
                 </div>
 
-                <!-- Product Grid (Clothing Brand Style) -->
                 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
                     <!-- Products injected by JS -->
                 </div>
@@ -292,7 +299,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
                 
-                <!-- Brand & Newsletter -->
                 <div class="lg:col-span-2">
                     <div class="flex items-center mb-6">
                         <div class="w-8 h-8 mr-2 relative flex items-center justify-center bg-white rounded-md p-1">
@@ -301,13 +307,8 @@
                         <span class="text-2xl font-extrabold tracking-tight uppercase">WAVEGUARD</span>
                     </div>
                     <p class="text-gray-400 text-sm mb-6 leading-relaxed">Berlangganan buletin kami untuk penawaran eksklusif, rilis ekosistem baru, dan tips keamanan berselancar bersama keluarga.</p>
-                    <form class="flex" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');">
-                        <input type="email" placeholder="Alamat Email Anda" class="w-full bg-gray-800 border border-gray-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#51B5B3]" required>
-                        <button type="submit" class="bg-[#51B5B3] hover:bg-white hover:text-gray-900 text-white px-6 py-3 font-bold transition-colors uppercase text-sm tracking-wider">Daftar</button>
-                    </form>
                 </div>
 
-                <!-- Links 1 -->
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-gray-300">Ekosistem</h4>
                     <ul class="space-y-4 text-sm text-gray-400">
@@ -318,7 +319,6 @@
                     </ul>
                 </div>
 
-                <!-- Links 2 -->
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-gray-300">Layanan</h4>
                     <ul class="space-y-4 text-sm text-gray-400">
@@ -329,7 +329,6 @@
                     </ul>
                 </div>
 
-                <!-- Links 3 -->
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-gray-300">Ikuti Kami</h4>
                     <div class="flex space-x-4 mb-6">
@@ -351,9 +350,154 @@
     </footer>
 
     <!-- UI Overlays & Modals -->
-    <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity" onclick="closeAllModals()"></div>
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-40 hidden backdrop-blur-sm transition-opacity" onclick="closeAllModals()"></div>
 
-    <!-- Cart Sidebar -->
+    <!-- 1. PRODUCT DETAIL MODAL (Halaman Detail Produk) -->
+    <div id="product-modal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-3/4 max-w-4xl bg-white rounded-2xl z-50 hidden shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]">
+        <button onclick="closeAllModals()" class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full p-2 text-gray-500 hover:text-red-500 z-10"><i data-lucide="x" class="w-6 h-6"></i></button>
+        <!-- Product Image -->
+        <div class="w-full md:w-1/2 bg-gray-50 flex items-center justify-center p-8 relative">
+            <span class="absolute top-6 left-6 bg-[#1C3B5E] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-sm shadow-md">Official Waveguard</span>
+            <img id="detail-img" src="" alt="Product" class="w-full h-auto max-h-80 object-contain drop-shadow-xl">
+        </div>
+        <!-- Product Info -->
+        <div class="w-full md:w-1/2 p-8 md:p-10 flex flex-col overflow-y-auto">
+            <h2 id="detail-name" class="text-3xl font-extrabold text-[#1C3B5E] mb-2 leading-tight">Nama Produk</h2>
+            
+            <div class="mb-6 pb-6 border-b border-gray-100">
+                <p class="text-sm text-red-500 font-bold mb-1">Pre-Order Discount!</p>
+                <div class="flex items-end gap-3">
+                    <span id="detail-price" class="text-3xl font-black text-[#51B5B3]">Rp 0</span>
+                    <span id="detail-normal-price" class="text-lg text-gray-400 line-through font-medium mb-1">Rp 0</span>
+                </div>
+            </div>
+            
+            <h3 class="font-bold text-gray-900 mb-2 uppercase tracking-wider text-sm">Spesifikasi Unggulan</h3>
+            <p id="detail-desc" class="text-gray-600 text-sm leading-relaxed mb-8 flex-grow">Deskripsi produk di sini...</p>
+            
+            <!-- Trust Indicators -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="flex items-center text-xs text-gray-500 font-bold"><i data-lucide="shield-check" class="w-4 h-4 mr-2 text-[#51B5B3]"></i> Garansi 1 Tahun</div>
+                <div class="flex items-center text-xs text-gray-500 font-bold"><i data-lucide="truck" class="w-4 h-4 mr-2 text-[#51B5B3]"></i> Gratis Ongkir</div>
+            </div>
+            
+            <button id="detail-add-btn" class="w-full bg-[#1C3B5E] hover:bg-[#51B5B3] text-white py-4 rounded-xl font-bold uppercase tracking-widest transition-colors shadow-lg flex justify-center items-center">
+                <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Pre-Order Now
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. CHECKOUT MODAL (Formulir Pemesanan & Sistem Pembayaran) -->
+    <div id="checkout-modal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-2/3 max-w-3xl bg-white rounded-2xl z-50 hidden shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-[#1C3B5E] text-white">
+            <h2 class="text-lg font-bold flex items-center"><i data-lucide="lock" class="w-5 h-5 mr-2"></i> Secure Checkout</h2>
+            <button onclick="closeAllModals()" class="hover:text-[#51B5B3] transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        
+        <div class="p-6 overflow-y-auto flex-grow bg-gray-50">
+            <form id="checkout-form" class="space-y-6" onsubmit="submitCheckout(event)">
+                <!-- Data Pengiriman -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h3 class="font-bold text-[#1C3B5E] mb-4 border-b pb-2 uppercase tracking-wider text-sm">1. Data Pengiriman</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap</label>
+                            <input type="text" id="co-name" required class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-[#51B5B3] focus:border-[#51B5B3]">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp Aktif</label>
+                            <input type="tel" id="co-wa" required class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-[#51B5B3] focus:border-[#51B5B3]">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Alamat Pengiriman Lengkap</label>
+                            <textarea id="co-address" required rows="2" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-[#51B5B3] focus:border-[#51B5B3]"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Pilihan Ekspedisi</label>
+                            <select id="co-courier" required class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-[#51B5B3] focus:border-[#51B5B3]">
+                                <option value="JNE YES (1-2 Hari)">JNE YES (1-2 Hari) - Rp 25.000</option>
+                                <option value="Sicepat BEST (1-2 Hari)">Sicepat BEST (1-2 Hari) - Rp 22.000</option>
+                                <option value="J&T Express (2-3 Hari)">J&T Express (2-3 Hari) - Rp 15.000</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metode Pembayaran & Bukti -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h3 class="font-bold text-[#1C3B5E] mb-4 border-b pb-2 uppercase tracking-wider text-sm">2. Metode Pembayaran</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                            <input type="radio" name="payment" value="BCA Virtual Account" checked class="form-radio text-[#51B5B3] h-4 w-4" onchange="toggleQRIS(false)">
+                            <span class="ml-3 text-sm font-bold text-gray-800">Transfer Bank (BCA Virtual Account)</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                            <input type="radio" name="payment" value="Mandiri Virtual Account" class="form-radio text-[#51B5B3] h-4 w-4" onchange="toggleQRIS(false)">
+                            <span class="ml-3 text-sm font-bold text-gray-800">Transfer Bank (Mandiri Virtual Account)</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition">
+                            <input type="radio" name="payment" value="QRIS" class="form-radio text-[#51B5B3] h-4 w-4" onchange="toggleQRIS(true)">
+                            <span class="ml-3 text-sm font-bold text-gray-800 flex items-center">Scan QRIS (OVO, Gopay, Dana, dll) <i data-lucide="qr-code" class="w-4 h-4 ml-2"></i></span>
+                        </label>
+                    </div>
+                    
+                    <!-- QRIS Dummy Image -->
+                    <div id="qris-container" class="hidden mt-4 p-4 border border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center bg-gray-50">
+                        <p class="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">Scan Barcode Ini</p>
+                        <div class="w-32 h-32 bg-white border-2 border-gray-800 p-2 flex items-center justify-center relative">
+                            <div class="w-full h-full border-[10px] border-dashed border-gray-800"></div>
+                            <div class="absolute bg-white px-2 font-bold text-[#1C3B5E] text-xs">WAVEGUARD</div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">QRIS Terverifikasi a.n Waveguard Official</p>
+                    </div>
+                </div>
+
+                <!-- Ringkasan & CTA -->
+                <div class="bg-[#1C3B5E] text-white p-6 rounded-xl shadow-md">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-300">Total Harga Produk:</span>
+                        <span id="co-subtotal" class="font-bold text-sm">Rp 0</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/20">
+                        <span class="text-sm text-gray-300">Promo Gratis Ongkir:</span>
+                        <span class="font-bold text-sm text-[#51B5B3]">- Rp 0</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-lg font-bold">Total Pembayaran:</span>
+                        <span id="co-total" class="text-2xl font-black text-[#51B5B3]">Rp 0</span>
+                    </div>
+                    <button type="submit" class="w-full bg-[#51B5B3] hover:bg-white hover:text-[#1C3B5E] text-white py-4 rounded-xl font-black uppercase tracking-widest transition-colors flex justify-center items-center">
+                        Konfirmasi Pesanan (via WhatsApp)
+                        <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                    </button>
+                    <p class="text-center text-[10px] text-gray-400 mt-3">Dengan menekan tombol ini, pesanan Anda akan dicatat dan diteruskan ke admin WhatsApp kami untuk konfirmasi pembayaran (Bukti Transaksi D2C).</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. INVOICE / SUCCESS MODAL (Bukti Transaksi Internal) -->
+    <div id="invoice-modal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-sm bg-white rounded-2xl z-50 hidden shadow-2xl overflow-hidden flex flex-col text-center p-8">
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="check-circle" class="w-10 h-10 text-green-500"></i>
+        </div>
+        <h2 class="text-2xl font-black text-[#1C3B5E] mb-2">Order Success!</h2>
+        <p class="text-gray-500 text-sm mb-6">Pesanan Anda telah masuk ke dalam sistem Waveguard Official.</p>
+        
+        <div class="bg-gray-50 rounded-lg p-4 mb-6 border border-gray-200">
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Order ID</p>
+            <p id="inv-order-id" class="text-lg font-black text-[#1C3B5E] mb-3">#WG-2026-000</p>
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Status Pembayaran</p>
+            <p class="text-sm font-bold text-amber-600 bg-amber-100 inline-block px-3 py-1 rounded-full">Menunggu Konfirmasi WA</p>
+        </div>
+        
+        <a id="btn-wa-redirect" href="#" target="_blank" onclick="closeAllModals(); toggleAccount();" class="w-full bg-green-500 hover:bg-green-600 text-white py-3.5 rounded-xl font-bold uppercase tracking-wider transition-colors shadow-lg flex justify-center items-center mb-3">
+            <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i> Kirim Bukti ke WA
+        </a>
+        <button onclick="closeAllModals(); toggleAccount();" class="text-xs text-gray-400 font-bold hover:text-[#1C3B5E] uppercase tracking-wider">Tutup & Lihat Riwayat</button>
+    </div>
+
+    <!-- CART SIDEBAR -->
     <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
         <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-[#1C3B5E] text-white">
             <h2 class="text-lg font-bold flex items-center"><i data-lucide="shopping-bag" class="w-5 h-5 mr-2"></i> Tas Belanja</h2>
@@ -367,32 +511,23 @@
                 <span>Total:</span>
                 <span id="cart-total">Rp 0</span>
             </div>
-            <button onclick="processCheckout()" class="w-full bg-[#51B5B3] hover:bg-[#1C3B5E] text-white py-3.5 rounded-lg font-bold uppercase tracking-wider transition-colors shadow-lg flex justify-center items-center">
-                Checkout Sekarang
+            <button onclick="openCheckout()" class="w-full bg-[#51B5B3] hover:bg-[#1C3B5E] text-white py-3.5 rounded-lg font-bold uppercase tracking-wider transition-colors shadow-lg flex justify-center items-center">
+                Lanjut ke Checkout
             </button>
         </div>
     </div>
 
-    <!-- Account Sidebar (Order History) -->
+    <!-- ACCOUNT SIDEBAR -->
     <div id="account-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-white z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
         <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-[#1C3B5E] text-white">
-            <h2 class="text-lg font-bold flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2"></i> Akun & Pesanan</h2>
+            <h2 class="text-lg font-bold flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2"></i> Riwayat Transaksi D2C</h2>
             <button onclick="toggleAccount()" class="hover:text-[#51B5B3] transition"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
         <div class="p-5 flex-grow overflow-y-auto">
-            <div class="mb-6 flex items-center space-x-4 bg-gradient-to-r from-gray-50 to-[#E1F2F2] p-4 rounded-xl border border-gray-100">
-                <div class="w-14 h-14 bg-[#1C3B5E] rounded-full flex items-center justify-center text-white font-extrabold text-2xl shadow-inner">W</div>
-                <div>
-                    <h3 class="font-bold text-[#1C3B5E] text-lg">Waveguard Surfer</h3>
-                    <p class="text-xs text-[#51B5B3] font-bold uppercase tracking-wider">Member Premium</p>
-                </div>
-            </div>
-            
             <div class="flex justify-between items-center mb-4 border-b border-gray-200 pb-2">
-                <h3 class="font-bold text-gray-900">Riwayat Pesanan</h3>
+                <h3 class="font-bold text-gray-900 uppercase tracking-wider text-sm">Pesanan Saya</h3>
                 <button onclick="clearOrders()" class="text-xs text-red-500 hover:underline">Hapus Riwayat</button>
             </div>
-            
             <div id="order-history" class="space-y-4 pb-10">
                 <!-- Orders will be rendered here -->
             </div>
@@ -408,16 +543,96 @@
 
         // Data Ekosistem 10 Produk Waveguard
         const products = [
-            { id: 1, name: "Surf-Buddy Smart Vest", category: "pakaian", price: 1850000, desc: "Pelampung selancar revolusioner khusus anak. GPS & Emergency Water-Trigger.", img: "https://drive.google.com/thumbnail?id=1IkIly3RprRQNYsL-j3OBsYak8zRRJGQX&sz=w600", isNew: true },
-            { id: 2, name: "UV-Alert Rash Guard", category: "pakaian", price: 550000, desc: "Eco-friendly spandex UPF 50+. Tinta thermochromic UV-reactive (berubah merah saat UV berbahaya).", img: "https://drive.google.com/thumbnail?id=1UANQhcgBfhThsDnyU7aU_Jk13hSW-8ug&sz=w600", isNew: false },
-            { id: 3, name: "Quick-Dry Character Poncho", category: "pakaian", price: 395000, desc: "Ponco microfiber ultra-absorbent. Kering 3x lebih cepat, desain karakter lucu.", img: "https://drive.google.com/thumbnail?id=1KD2_JuZdph_A-uJm8opdAbed_Hiot_mG&sz=w600", isNew: false },
-            { id: 4, name: "Waterproof Tech-Box", category: "aksesoris", price: 275000, desc: "Rigid drawer box kedap air (IPX7 Rated). Reusable sebagai brankas di pantai.", img: "https://drive.google.com/thumbnail?id=15upEF2yDz0zGxDq1BVgkNuXZNxBzrRhn&sz=w600", isNew: true },
-            { id: 5, name: "Aqua-Grip Smart Booties", category: "pakaian", price: 425000, desc: "Sepatu pelindung karang anti-slip micro-suction. Neoprene 3mm yang ringan.", img: "https://drive.google.com/thumbnail?id=1jBCYQUux_JGuDGjQwPFynyHc-wBerNc5&sz=w600", isNew: false },
-            { id: 6, name: "Eco-Glide Junior Softboard", category: "gear", price: 3200000, desc: "Papan busa pemula material daur ulang. Volume ekstra stabil, EVA deck anti-memar.", img: "https://drive.google.com/thumbnail?id=1W7XcnK_pArZZr19nAsWpymlRvx1b1WxA&sz=w600", isNew: false },
-            { id: 7, name: "Tide-Tote Wet/Dry Bag", category: "gear", price: 650000, desc: "Tas pantai modular 2 kompartemen (basah & kering). Katup sirkulasi anti-odor.", img: "https://drive.google.com/thumbnail?id=1uUhphZ-PMEexhUxy7sERCGFiy-bnQJhy&sz=w600", isNew: false },
-            { id: 8, name: "Wave-Shield Mineral Zinc", category: "aksesoris", price: 195000, desc: "Sunscreen stik Zinc Oxide 100% Reef-Safe. Untuk kulit anak sensitif.", img: "https://drive.google.com/thumbnail?id=1TOmck6TlktH3h6Am0B9b0rbKJTObszEt&sz=w600", isNew: false },
-            { id: 9, name: "Goggle-Eye Surf Shades", category: "aksesoris", price: 350000, desc: "Kacamata anti-UV400 polarized. Strap neoprene elastis & otomatis mengapung.", img: "https://drive.google.com/thumbnail?id=1eo625TF-ZG4zHsn4g_MrTtY9Q9ghSLuM&sz=w600", isNew: false },
-            { id: 10, name: "Zen-Wave Ear Protectors", category: "aksesoris", price: 225000, desc: "Earplugs silikon medis ergonomis. Mencegah air masuk tapi bisa mendengar instruksi.", img: "https://drive.google.com/thumbnail?id=1EQafQEw1FPxqueduwrCCfAshxqOCLY1w&sz=w600", isNew: false }
+            { 
+                id: 1, 
+                name: "Surf-Buddy Smart Vest", 
+                category: "pakaian", 
+                price: 1850000, 
+                desc: "Pelampung cerdas berdesain futuristik dengan material hydro-aerodynamic. Tidak sekadar stylish, vest ini menanamkan modul GPS mikro dan Emergency Water-Trigger bercahaya LED pada bagian dada. Memberikan kebebasan bermanuver bagi si kecil dan ketenangan mutlak bagi Anda.", 
+                img: "https://drive.google.com/thumbnail?id=1IkIly3RprRQNYsL-j3OBsYak8zRRJGQX&sz=w600", 
+                isNew: true 
+            },
+            { 
+                id: 2, 
+                name: "UV-Alert Rash Guard", 
+                category: "pakaian", 
+                price: 550000, 
+                desc: "Pakaian pelindung dengan siluet atletis nan modern. Ditenun dari serat eco-spandex UPF 50+ bertekstur premium. Menampilkan inovasi logo Thermochromic di bagian dada yang akan menyala kemerahan secara dramatis saat paparan UV melebihi batas aman.", 
+                img: "https://drive.google.com/thumbnail?id=1UANQhcgBfhThsDnyU7aU_Jk13hSW-8ug&sz=w600", 
+                isNew: false 
+            },
+            { 
+                id: 3, 
+                name: "Quick-Dry Character Poncho", 
+                category: "pakaian", 
+                price: 395000, 
+                desc: "Jubah ganti berbahan microfiber plush tebal namun sangat ringan. Memiliki siluet modern dengan aksen karakter laut berdesain premium di bagian hoodie. Mampu menyerap air dalam hitungan detik dan mengunci kehangatan tubuh anak segera setelah keluar dari air.", 
+                img: "https://drive.google.com/thumbnail?id=1KD2_JuZdph_A-uJm8opdAbed_Hiot_mG&sz=w600", 
+                isNew: false 
+            },
+            { 
+                id: 4, 
+                name: "Waterproof Tech-Box", 
+                category: "aksesoris", 
+                price: 275000, 
+                desc: "Brankas mini portabel berbentuk kotak taktis bergaya industrial. Dibuat dengan segel polimer berlapis yang 100% tahan air (IPX7). Kompartemen dalamnya dirancang presisi dengan bantalan shockproof untuk mengamankan smartphone dan barang berharga di tengah pasir pantai.", 
+                img: "https://drive.google.com/thumbnail?id=15upEF2yDz0zGxDq1BVgkNuXZNxBzrRhn&sz=w600", 
+                isNew: true 
+            },
+            { 
+                id: 5, 
+                name: "Aqua-Grip Smart Booties", 
+                category: "pakaian", 
+                price: 425000, 
+                desc: "Sepatu air berdesain sneaker-hybrid yang aerodinamis. Menggunakan material neoprene mesh berpori dan sol karet bertekstur micro-suction gurita yang mencengkeram karang dengan sempurna. Perlindungan maksimal tanpa mengorbankan fleksibilitas engkel.", 
+                img: "https://drive.google.com/thumbnail?id=1jBCYQUux_JGuDGjQwPFynyHc-wBerNc5&sz=w600", 
+                isNew: false 
+            },
+            { 
+                id: 6, 
+                name: "Eco-Glide Junior Softboard", 
+                category: "gear", 
+                price: 3200000, 
+                desc: "Papan selancar soft-top dengan outline ramping berbalut gradasi ocean-teal yang elegan. Core papan terbuat dari recycled-foam ringan berdaya apung tinggi, dilapisi deck pad bermotif heksagonal untuk grip anti-slip sempurna bagi peselancar junior.", 
+                img: "https://drive.google.com/thumbnail?id=1W7XcnK_pArZZr19nAsWpymlRvx1b1WxA&sz=w600", 
+                isNew: false 
+            },
+            { 
+                id: 7, 
+                name: "Tide-Tote Wet/Dry Bag", 
+                category: "gear", 
+                price: 650000, 
+                desc: "Tas ransel duffel berpenampilan matte-black tangguh dengan aksen strap cyan. Dilengkapi teknologi sekat kedap air mutlak; memisahkan pakaian basah dan gadget kering secara sempurna, plus katup ventilasi pintar pelepas kelembapan.", 
+                img: "https://drive.google.com/thumbnail?id=1uUhphZ-PMEexhUxy7sERCGFiy-bnQJhy&sz=w600", 
+                isNew: false 
+            },
+            { 
+                id: 8, 
+                name: "Wave-Shield Mineral Zinc", 
+                category: "aksesoris", 
+                price: 195000, 
+                desc: "Tabir surya padat dalam kemasan stik matte putar yang kokoh. Berbahan dasar mineral Zinc Oxide murni yang 100% aman bagi terumbu karang. Olesannya meninggalkan lapisan warna neon pastel yang sangat pekat dan tak akan luntur dihantam ombak besar.", 
+                img: "https://drive.google.com/thumbnail?id=1TOmck6TlktH3h6Am0B9b0rbKJTObszEt&sz=w600", 
+                isNew: false 
+            },
+            { 
+                id: 9, 
+                name: "Goggle-Eye Surf Shades", 
+                category: "aksesoris", 
+                price: 350000, 
+                desc: "Kacamata pelindung bersiluet futuristik dengan lensa reflektif iridescent polarized. Bingkainya menggunakan material aerogel-infused polycarbonate super ringan yang bisa mengapung di air, dikunci dengan strap lingkar kepala bermotif sporty.", 
+                img: "https://drive.google.com/thumbnail?id=1eo625TF-ZG4zHsn4g_MrTtY9Q9ghSLuM&sz=w600", 
+                isNew: false 
+            },
+            { 
+                id: 10, 
+                name: "Zen-Wave Ear Protectors", 
+                category: "aksesoris", 
+                price: 225000, 
+                desc: "Pelindung telinga berukuran nano dengan lekukan ergonomis. Dicetak dari silikon medis transparan bergradasi. Sistem filter akustik di bagian tengahnya menolak air 100% namun tetap membiarkan frekuensi suara percakapan lewat dengan jernih.", 
+                img: "https://drive.google.com/thumbnail?id=1EQafQEw1FPxqueduwrCCfAshxqOCLY1w&sz=w600", 
+                isNew: false 
+            }
         ];
 
         // System Variables (Local Storage)
@@ -425,6 +640,7 @@
         let orders = JSON.parse(localStorage.getItem('wg_orders')) || [];
         let currentFilter = 'semua';
         let searchQuery = '';
+        let selectedProductForModal = null;
 
         const formatRupiah = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
 
@@ -433,7 +649,6 @@
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
             
-            // Filter by category and search query
             const filteredProducts = products.filter(p => {
                 const matchCategory = currentFilter === 'semua' || p.category === currentFilter;
                 const matchSearch = p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
@@ -451,22 +666,22 @@
                 let badge = product.isNew ? '<span class="absolute top-3 left-3 bg-[#1C3B5E] text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider z-10 rounded-sm shadow-md">Inovasi Baru</span>' : '';
 
                 grid.innerHTML += `
-                    <div class="product-card group relative bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+                    <div class="product-card group relative bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="openProductDetail(${product.id})">
                         <div class="relative w-full h-64 bg-gray-100 overflow-hidden flex items-center justify-center p-4">
                             ${badge}
                             <img src="${product.img}" alt="${product.name}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 mix-blend-multiply">
-                            <button onclick="addToCart(${product.id})" class="add-to-cart-btn absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur text-[#1C3B5E] font-bold py-3 text-sm uppercase tracking-wider hover:bg-[#51B5B3] hover:text-white flex items-center justify-center transition-colors shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-                                <i data-lucide="shopping-bag" class="w-4 h-4 mr-2"></i> Tambah ke Tas
+                            <button onclick="event.stopPropagation(); addToCart(${product.id})" class="add-to-cart-btn absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur text-[#1C3B5E] font-bold py-3 text-sm uppercase tracking-wider hover:bg-[#51B5B3] hover:text-white flex items-center justify-center transition-colors shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                                <i data-lucide="shopping-bag" class="w-4 h-4 mr-2"></i> Quick Add
                             </button>
                         </div>
                         <div class="p-6 flex flex-col flex-grow bg-white z-10">
-                            <h3 class="text-lg font-extrabold text-[#1C3B5E] mb-2 leading-snug cursor-pointer hover:text-[#51B5B3]">${product.name}</h3>
+                            <h3 class="text-lg font-extrabold text-[#1C3B5E] mb-2 leading-snug group-hover:text-[#51B5B3]">${product.name}</h3>
                             <p class="text-sm text-gray-500 mb-4 line-clamp-3 leading-relaxed flex-grow">${product.desc}</p>
                             <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
                                 <span class="text-xl font-bold text-[#51B5B3]">${formatRupiah(product.price)}</span>
-                                <button onclick="addToCart(${product.id})" class="w-8 h-8 rounded-full bg-gray-50 text-[#1C3B5E] flex items-center justify-center hover:bg-[#1C3B5E] hover:text-white transition">
-                                    <i data-lucide="plus" class="w-4 h-4"></i>
-                                </button>
+                                <div class="w-8 h-8 rounded-full bg-gray-50 text-[#1C3B5E] flex items-center justify-center group-hover:bg-[#1C3B5E] group-hover:text-white transition">
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -475,59 +690,75 @@
             lucide.createIcons();
         }
 
-        // Search Functionality
-        const handleSearch = (e) => {
-            searchQuery = e.target.value.toLowerCase();
-            renderProducts();
+        // Product Detail Modal
+        window.openProductDetail = (id) => {
+            const product = products.find(p => p.id === id);
+            if(!product) return;
+            
+            selectedProductForModal = product;
+            document.getElementById('detail-img').src = product.img;
+            document.getElementById('detail-name').innerText = product.name;
+            document.getElementById('detail-desc').innerText = product.desc;
+            
+            const normalPrice = product.price * 1.20;
+            document.getElementById('detail-price').innerText = formatRupiah(product.price);
+            document.getElementById('detail-normal-price').innerText = formatRupiah(normalPrice);
+            
+            const addBtn = document.getElementById('detail-add-btn');
+            addBtn.onclick = () => {
+                addToCart(product.id);
+                closeAllModals();
+                toggleCart();
+            };
+
+            closeAllModals();
+            document.getElementById('product-modal').classList.remove('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
         };
+
+        // Filter & Search Logic
+        const handleSearch = (e) => { searchQuery = e.target.value.toLowerCase(); renderProducts(); };
         document.getElementById('desktop-search').addEventListener('input', handleSearch);
         document.getElementById('mobile-search').addEventListener('input', handleSearch);
 
-        // Filter Category
         window.filterCategory = function(filterValue) {
             currentFilter = filterValue;
             const sidebarBtns = document.querySelectorAll('.sidebar-filter');
             sidebarBtns.forEach(b => {
                 if(b.getAttribute('data-filter') === filterValue) {
-                    b.classList.add('text-gray-800', 'font-bold', 'active');
-                    b.classList.remove('text-gray-500', 'font-medium');
+                    b.classList.add('text-gray-800', 'font-bold', 'active'); b.classList.remove('text-gray-500', 'font-medium');
                 } else {
-                    b.classList.remove('text-gray-800', 'font-bold', 'active');
-                    b.classList.add('text-gray-500', 'font-medium');
+                    b.classList.remove('text-gray-800', 'font-bold', 'active'); b.classList.add('text-gray-500', 'font-medium');
                 }
             });
             renderProducts();
             document.getElementById('mobile-menu').classList.add('hidden');
         };
 
-        // Modal Toggles Logic
+        // Modal Management
         const overlay = document.getElementById('overlay');
         const cartSidebar = document.getElementById('cart-sidebar');
         const accountSidebar = document.getElementById('account-sidebar');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const invoiceModal = document.getElementById('invoice-modal');
+        const productModal = document.getElementById('product-modal');
 
         window.toggleCart = () => {
-            const isOpen = !cartSidebar.classList.contains('translate-x-full');
-            closeAllModals();
-            if (!isOpen) {
-                cartSidebar.classList.remove('translate-x-full');
-                overlay.classList.remove('hidden');
-                renderCartUI();
-            }
+            if (cartSidebar.classList.contains('translate-x-full')) { closeAllModals(); cartSidebar.classList.remove('translate-x-full'); overlay.classList.remove('hidden'); renderCartUI(); }
+            else { closeAllModals(); }
         };
 
         window.toggleAccount = () => {
-            const isOpen = !accountSidebar.classList.contains('translate-x-full');
-            closeAllModals();
-            if (!isOpen) {
-                accountSidebar.classList.remove('translate-x-full');
-                overlay.classList.remove('hidden');
-                renderOrdersUI();
-            }
+            if (accountSidebar.classList.contains('translate-x-full')) { closeAllModals(); accountSidebar.classList.remove('translate-x-full'); overlay.classList.remove('hidden'); renderOrdersUI(); }
+            else { closeAllModals(); }
         };
 
         window.closeAllModals = () => {
             cartSidebar.classList.add('translate-x-full');
             accountSidebar.classList.add('translate-x-full');
+            checkoutModal.classList.add('hidden');
+            invoiceModal.classList.add('hidden');
+            productModal.classList.add('hidden');
             overlay.classList.add('hidden');
         };
 
@@ -535,44 +766,26 @@
         window.addToCart = function(id) {
             const product = products.find(p => p.id === id);
             const existingItem = cart.find(item => item.id === id);
-            
-            if (existingItem) {
-                existingItem.qty += 1;
-            } else {
-                cart.push({ ...product, qty: 1 });
-            }
+            if (existingItem) existingItem.qty += 1;
+            else cart.push({ ...product, qty: 1 });
             
             updateCartStorage();
-            showToast(`${product.name} ditambahkan!`);
-            
-            // Pop animation on icon
+            showToast(`${product.name} dimasukkan ke tas!`);
             const cartBadge = document.getElementById('cart-count');
-            cartBadge.classList.add('scale-125');
-            setTimeout(() => cartBadge.classList.remove('scale-125'), 200);
+            cartBadge.classList.add('scale-125'); setTimeout(() => cartBadge.classList.remove('scale-125'), 200);
         }
 
         window.updateQty = (id, change) => {
             const item = cart.find(i => i.id === id);
-            if(item) {
-                item.qty += change;
-                if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
-                updateCartStorage();
-                renderCartUI();
-            }
+            if(item) { item.qty += change; if(item.qty <= 0) cart = cart.filter(i => i.id !== id); updateCartStorage(); renderCartUI(); }
         }
 
         function updateCartStorage() {
             localStorage.setItem('wg_cart', JSON.stringify(cart));
-            
-            // Update Icon Badge
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             const cartBadge = document.getElementById('cart-count');
             cartBadge.textContent = totalItems;
-            if (totalItems > 0) {
-                cartBadge.classList.remove('opacity-0');
-            } else {
-                cartBadge.classList.add('opacity-0');
-            }
+            if (totalItems > 0) cartBadge.classList.remove('opacity-0'); else cartBadge.classList.add('opacity-0');
         }
 
         function renderCartUI() {
@@ -580,14 +793,8 @@
             cartContainer.innerHTML = '';
             
             if (cart.length === 0) {
-                cartContainer.innerHTML = `
-                    <div class="h-full flex flex-col items-center justify-center text-gray-400">
-                        <i data-lucide="shopping-cart" class="w-16 h-16 mb-4 opacity-50"></i>
-                        <p class="font-medium">Keranjang masih kosong</p>
-                    </div>`;
-                document.getElementById('cart-total').innerText = 'Rp 0';
-                lucide.createIcons();
-                return;
+                cartContainer.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-gray-400"><i data-lucide="shopping-cart" class="w-16 h-16 mb-4 opacity-50"></i><p class="font-medium">Tas masih kosong</p></div>`;
+                document.getElementById('cart-total').innerText = 'Rp 0'; lucide.createIcons(); return;
             }
 
             let total = 0;
@@ -605,59 +812,81 @@
                                 <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-bold text-gray-600">+</button>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
-            document.getElementById('cart-total').innerText = formatRupiah(total);
-            lucide.createIcons();
+            document.getElementById('cart-total').innerText = formatRupiah(total); lucide.createIcons();
         }
 
-        // Checkout Process (Dummy)
-        window.processCheckout = () => {
-            if (cart.length === 0) {
-                alert("Keranjang belanja masih kosong!"); return;
-            }
+        // Checkout Modal (Screenshoot 2 & 3)
+        window.openCheckout = () => {
+            if(cart.length === 0) { alert('Keranjang kosong!'); return; }
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('co-subtotal').innerText = formatRupiah(total);
+            document.getElementById('co-total').innerText = formatRupiah(total);
             
-            // Create dummy order record
+            closeAllModals();
+            checkoutModal.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+        };
+
+        window.toggleQRIS = (show) => {
+            const qrisContainer = document.getElementById('qris-container');
+            if(show) qrisContainer.classList.remove('hidden');
+            else qrisContainer.classList.add('hidden');
+        };
+
+        // WhatsApp Integration & Invoice
+        window.submitCheckout = (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('co-name').value;
+            const wa = document.getElementById('co-wa').value;
+            const address = document.getElementById('co-address').value;
+            const courier = document.getElementById('co-courier').value;
+            const payment = document.querySelector('input[name="payment"]:checked').value;
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            const orderId = '#WG-2026-' + Math.floor(Math.random() * 900 + 100);
+            
+            let itemsText = cart.map(item => `- ${item.qty}x ${item.name} (Rp ${item.price.toLocaleString('id-ID')})`).join('%0A');
+            let waText = `Halo Waveguard Official, saya ingin menyelesaikan pemesanan D2C saya:%0A%0A*Order ID:* ${orderId}%0A*Nama:* ${name}%0A*No WA:* ${wa}%0A*Alamat:* ${address}%0A*Ekspedisi:* ${courier}%0A*Metode Bayar:* ${payment}%0A%0A*Rincian Barang:*%0A${itemsText}%0A%0A*Total Bayar:* ${formatRupiah(total)}%0A%0AMohon instruksi pembayaran selanjutnya. Terima kasih.`;
+            
+            const waLink = `https://wa.me/6281234567890?text=${waText}`;
+            
             const newOrder = {
-                id: 'WG-' + Math.random().toString(36).substr(2, 8).toUpperCase(),
-                date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                id: orderId,
+                date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
                 items: [...cart],
                 total: total,
-                status: 'Sedang Diproses' // Dummy shipping status
+                status: 'Menunggu Konfirmasi WA'
             };
-            
-            orders.unshift(newOrder); // Prepend to array
+            orders.unshift(newOrder);
             localStorage.setItem('wg_orders', JSON.stringify(orders));
             
-            // Empty the cart
             cart = [];
             updateCartStorage();
             
-            showToast("Pesanan Berhasil Dibuat!");
-            toggleAccount(); // Switch view to show the new order history
-        }
+            closeAllModals();
+            document.getElementById('inv-order-id').innerText = orderId;
+            document.getElementById('btn-wa-redirect').href = waLink;
+            
+            invoiceModal.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+        };
 
         // Order History Rendering
         function renderOrdersUI() {
             const container = document.getElementById('order-history');
             container.innerHTML = '';
-            
-            if (orders.length === 0) {
-                container.innerHTML = `<div class="text-center text-gray-500 py-6 text-sm font-medium">Belum ada riwayat pesanan.</div>`;
-                return;
-            }
+            if (orders.length === 0) { container.innerHTML = `<div class="text-center text-gray-500 py-6 text-sm font-medium">Belum ada riwayat pesanan.</div>`; return; }
 
             orders.forEach(order => {
                 let itemsHTML = '';
                 order.items.forEach(item => {
                     itemsHTML += `<div class="flex justify-between text-xs mb-1.5"><span class="text-gray-600 truncate pr-4">${item.qty}x ${item.name}</span><span class="font-bold">${formatRupiah(item.price * item.qty)}</span></div>`;
                 });
-
-                let statusColor = order.status === 'Sedang Diproses' ? 'bg-amber-100 text-amber-700' : 'bg-[#51B5B3]/20 text-[#1C3B5E]';
-
+                let statusColor = 'bg-amber-100 text-amber-700';
                 container.innerHTML += `
                     <div class="bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-100">
@@ -667,44 +896,28 @@
                             </div>
                             <span class="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide ${statusColor}">${order.status}</span>
                         </div>
-                        <div class="mb-3">
-                            ${itemsHTML}
-                        </div>
+                        <div class="mb-3">${itemsHTML}</div>
                         <div class="flex justify-between items-center pt-2 border-t border-gray-100">
-                            <span class="text-xs text-gray-500 font-medium">Total Pembayaran</span>
+                            <span class="text-xs text-gray-500 font-medium">Total D2C Order</span>
                             <span class="font-bold text-[#51B5B3] text-sm">${formatRupiah(order.total)}</span>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
         }
+        window.clearOrders = () => { if(confirm("Hapus riwayat pesanan (D2C Test)?")) { orders = []; localStorage.removeItem('wg_orders'); renderOrdersUI(); } }
 
-        window.clearOrders = () => {
-            if(confirm("Apakah Anda yakin ingin menghapus semua riwayat pesanan dari perangkat ini?")) {
-                orders = [];
-                localStorage.removeItem('wg_orders');
-                renderOrdersUI();
-            }
-        }
-
-        // Global Toast Component
+        // Global Toast
         function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'bg-white text-gray-900 px-5 py-3 shadow-2xl flex items-center space-x-3 toast-enter border-l-4 border-[#51B5B3] min-w-[250px] rounded-r-lg';
             toast.innerHTML = `<i data-lucide="check-circle-2" class="w-5 h-5 text-[#51B5B3]"></i><span class="text-sm font-bold text-[#1C3B5E]">${message}</span>`;
-            container.appendChild(toast);
-            lucide.createIcons();
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(10px)';
-                toast.style.transition = 'all 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            container.appendChild(toast); lucide.createIcons();
+            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(10px)'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
 
         // Initialize App State
-        updateCartStorage();
+        updateCartStorage(); 
         renderProducts();
 
     </script>
